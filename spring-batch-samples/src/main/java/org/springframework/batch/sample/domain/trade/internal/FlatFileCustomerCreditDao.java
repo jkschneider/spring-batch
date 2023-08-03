@@ -60,15 +60,15 @@ public class FlatFileCustomerCreditDao implements CustomerCreditDao, DisposableB
 	}
 
 	public void open(ExecutionContext executionContext) throws Exception {
-		if (itemWriter instanceof ItemStream) {
-			((ItemStream) itemWriter).open(executionContext);
+		if (itemWriter instanceof ItemStream stream) {
+			stream.open(executionContext);
 		}
 		opened = true;
 	}
 
 	public void close() throws Exception {
-		if (itemWriter instanceof ItemStream) {
-			((ItemStream) itemWriter).close();
+		if (itemWriter instanceof ItemStream stream) {
+			stream.close();
 		}
 	}
 

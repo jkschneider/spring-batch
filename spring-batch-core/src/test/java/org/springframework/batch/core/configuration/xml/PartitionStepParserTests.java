@@ -152,8 +152,11 @@ public class PartitionStepParserTests implements ApplicationContextAware {
 						"partitionHandler");
 				TaskletStep taskletStep = accessPrivateField(taskExecutorPartitionHandler, "step");
 
-				assertNotNull(taskletStep, "the taskletStep wasn't configured with a step. "
-						+ "We're trusting that the factory ensured " + "a reference was given.");
+				assertNotNull(taskletStep, """
+						the taskletStep wasn't configured with a step. \
+						We're trusting that the factory ensured \
+						a reference was given.\
+						""");
 			}
 		}
 		assertEquals(BatchStatus.COMPLETED, jobExecution.getStatus());
@@ -192,8 +195,11 @@ public class PartitionStepParserTests implements ApplicationContextAware {
 						"partitionHandler");
 				TaskletStep taskletStep = accessPrivateField(taskExecutorPartitionHandler, "step");
 
-				assertNotNull(taskletStep, "the taskletStep wasn't configured with a step. "
-						+ "We're trusting that the factory ensured " + "a reference was given.");
+				assertNotNull(taskletStep, """
+						the taskletStep wasn't configured with a step. \
+						We're trusting that the factory ensured \
+						a reference was given.\
+						""");
 			}
 		}
 		assertEquals(BatchStatus.COMPLETED, jobExecution.getStatus());

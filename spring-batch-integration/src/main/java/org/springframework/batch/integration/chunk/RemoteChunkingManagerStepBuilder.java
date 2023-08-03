@@ -373,9 +373,12 @@ public class RemoteChunkingManagerStepBuilder<I, O> extends FaultTolerantStepBui
 	public RemoteChunkingManagerStepBuilder<I, O> writer(ItemWriter<? super O> writer)
 			throws UnsupportedOperationException {
 		throw new UnsupportedOperationException(
-				"When configuring a manager step " + "for remote chunking, the item writer will be automatically set "
-						+ "to an instance of ChunkMessageChannelItemWriter. The item writer "
-						+ "must not be provided in this case.");
+				"""
+				When configuring a manager step \
+				for remote chunking, the item writer will be automatically set \
+				to an instance of ChunkMessageChannelItemWriter. The item writer \
+				must not be provided in this case.\
+				""");
 	}
 
 	@Override

@@ -63,9 +63,9 @@ public class JobFlowBuilder extends FlowBuilder<FlowJobBuilder> {
 	public FlowJobBuilder build() {
 		Flow flow = flow();
 
-		if (flow instanceof InitializingBean) {
+		if (flow instanceof InitializingBean bean) {
 			try {
-				((InitializingBean) flow).afterPropertiesSet();
+				bean.afterPropertiesSet();
 			}
 			catch (Exception e) {
 				throw new FlowBuilderException(e);

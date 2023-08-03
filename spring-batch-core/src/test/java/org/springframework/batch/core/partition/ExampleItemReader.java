@@ -68,14 +68,14 @@ public class ExampleItemReader extends AbstractItemStreamItemReader<String> {
 		if (index >= input.length || index >= max) {
 			return null;
 		}
-		logger.info(String.format("Processing input index=%s, item=%s, in (%s)", index, input[index], this));
+		logger.info("Processing input index=%s, item=%s, in (%s)".formatted(index, input[index], this));
 		if (fail && index == 4) {
 			synchronized (ExampleItemReader.class) {
 				if (fail) {
 					// Only fail once per flag setting...
 					fail = false;
 					logger.info(
-							String.format("Throwing exception index=%s, item=%s, in (%s)", index, input[index], this));
+					"Throwing exception index=%s, item=%s, in (%s)".formatted(index, input[index], this));
 					index++;
 					throw new RuntimeException("Planned failure");
 				}

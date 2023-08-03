@@ -71,9 +71,9 @@ public class DefaultFieldSet implements FieldSet {
 	 */
 	public final void setNumberFormat(NumberFormat numberFormat) {
 		this.numberFormat = numberFormat;
-		if (numberFormat instanceof DecimalFormat) {
-			grouping = String.valueOf(((DecimalFormat) numberFormat).getDecimalFormatSymbols().getGroupingSeparator());
-			decimal = String.valueOf(((DecimalFormat) numberFormat).getDecimalFormatSymbols().getDecimalSeparator());
+		if (numberFormat instanceof DecimalFormat format) {
+			grouping = String.valueOf(format.getDecimalFormatSymbols().getGroupingSeparator());
+			decimal = String.valueOf(format.getDecimalFormatSymbols().getDecimalSeparator());
 		}
 	}
 
@@ -736,8 +736,8 @@ public class DefaultFieldSet implements FieldSet {
 		}
 		catch (ParseException e) {
 			String pattern;
-			if (dateFormat instanceof SimpleDateFormat) {
-				pattern = ((SimpleDateFormat) dateFormat).toPattern();
+			if (dateFormat instanceof SimpleDateFormat format) {
+				pattern = format.toPattern();
 			}
 			else {
 				pattern = dateFormat.toString();

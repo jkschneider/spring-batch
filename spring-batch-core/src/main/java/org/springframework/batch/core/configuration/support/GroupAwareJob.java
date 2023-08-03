@@ -104,8 +104,8 @@ public class GroupAwareJob implements Job {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (obj instanceof GroupAwareJob) {
-			return ((GroupAwareJob) obj).delegate.equals(delegate);
+		if (obj instanceof GroupAwareJob job) {
+			return job.delegate.equals(delegate);
 		}
 		return false;
 	}

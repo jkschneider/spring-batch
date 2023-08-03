@@ -47,8 +47,10 @@ public class ErrorLogTasklet implements Tasklet, StepExecutionListener {
 	@Nullable
 	@Override
 	public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-		Assert.notNull(this.stepName, "Step name not set.  Either this class was not registered as a listener "
-				+ "or the key 'stepName' was not found in the Job's ExecutionContext.");
+		Assert.notNull(this.stepName, """
+				Step name not set.  Either this class was not registered as a listener \
+				or the key 'stepName' was not found in the Job's ExecutionContext.\
+				""");
 		this.jdbcTemplate.update("insert into ERROR_LOG values (?, ?, '" + getSkipCount() + " records were skipped!')",
 				jobName, stepName);
 		return RepeatStatus.FINISHED;

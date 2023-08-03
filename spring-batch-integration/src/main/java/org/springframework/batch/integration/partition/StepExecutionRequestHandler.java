@@ -55,7 +55,7 @@ public class StepExecutionRequestHandler {
 		String stepName = request.getStepName();
 		Step step = stepLocator.getStep(stepName);
 		if (step == null) {
-			throw new NoSuchStepException(String.format("No Step with name [%s] could be located.", stepName));
+			throw new NoSuchStepException("No Step with name [%s] could be located.".formatted(stepName));
 		}
 
 		try {

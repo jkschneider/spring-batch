@@ -478,8 +478,10 @@ public class FaultTolerantStepBuilder<I, O> extends SimpleStepBuilder<I, O> {
 				chunkMonitor.setItemReader(getReader());
 			}
 			else {
-				logger.warn("Asynchronous TaskExecutor detected with ItemStream reader.  This is probably an error, "
-						+ "and may lead to incorrect restart data being stored.");
+				logger.warn("""
+						Asynchronous TaskExecutor detected with ItemStream reader.  This is probably an error, \
+						and may lead to incorrect restart data being stored.\
+						""");
 			}
 		}
 	}
@@ -597,10 +599,10 @@ public class FaultTolerantStepBuilder<I, O> extends SimpleStepBuilder<I, O> {
 
 		// Coordinate the retry policy with the exception handler:
 		RepeatOperations stepOperations = getStepOperations();
-		if (stepOperations instanceof RepeatTemplate) {
+		if (stepOperations instanceof RepeatTemplate template) {
 			SimpleRetryExceptionHandler exceptionHandler = new SimpleRetryExceptionHandler(retryPolicyWrapper,
 					getExceptionHandler(), nonRetryableExceptionClasses);
-			((RepeatTemplate) stepOperations).setExceptionHandler(exceptionHandler);
+			template.setExceptionHandler(exceptionHandler);
 		}
 
 		if (retryContextCache != null) {
@@ -739,9 +741,9 @@ public class FaultTolerantStepBuilder<I, O> extends SimpleStepBuilder<I, O> {
 
 		@Override
 		public boolean equals(Object obj) {
-			if (obj instanceof FaultTolerantStepBuilder.TerminateOnExceptionChunkListenerDelegate) {
+			if (obj instanceof FaultTolerantStepBuilder.TerminateOnExceptionChunkListenerDelegate delegate) {
 				// unwrap the ChunkListener
-				obj = ((TerminateOnExceptionChunkListenerDelegate) obj).chunkListener;
+				obj = delegate.chunkListener;
 			}
 			return chunkListener.equals(obj);
 		}

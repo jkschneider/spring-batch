@@ -117,10 +117,12 @@ public class SimpleStepHandler implements StepHandler, InitializingBean {
 			// If the last execution of this step was in the same job, it's
 			// probably intentional so we want to run it again...
 			if (logger.isInfoEnabled()) {
-				logger.info(String.format(
-						"Duplicate step [%s] detected in execution of job=[%s]. "
-								+ "If either step fails, both will be executed again on restart.",
-						step.getName(), jobInstance.getJobName()));
+				logger.info((
+				"""
+				Duplicate step [%s] detected in execution of job=[%s]. \
+				If either step fails, both will be executed again on restart.\
+				""").formatted(
+				step.getName(), jobInstance.getJobName()));
 			}
 			lastStepExecution = null;
 		}
@@ -211,9 +213,11 @@ public class SimpleStepHandler implements StepHandler, InitializingBean {
 		}
 
 		if (stepStatus == BatchStatus.UNKNOWN) {
-			throw new JobRestartException("Cannot restart step from UNKNOWN status. "
-					+ "The last execution ended with a failure that could not be rolled back, "
-					+ "so it may be dangerous to proceed. Manual intervention is probably necessary.");
+			throw new JobRestartException("""
+					Cannot restart step from UNKNOWN status. \
+					The last execution ended with a failure that could not be rolled back, \
+					so it may be dangerous to proceed. Manual intervention is probably necessary.\
+					""");
 		}
 
 		if ((stepStatus == BatchStatus.COMPLETED && !step.isAllowStartIfComplete())

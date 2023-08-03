@@ -417,8 +417,10 @@ public class FlatFileItemReaderBuilder<T> {
 		}
 
 		if (this.resource == null) {
-			logger.debug("The resource is null.  This is only a valid scenario when "
-					+ "injecting it later as in when using the MultiResourceItemReader");
+			logger.debug("""
+					The resource is null.  This is only a valid scenario when \
+					injecting it later as in when using the MultiResourceItemReader\
+					""");
 		}
 
 		Assert.notNull(this.recordSeparatorPolicy, "A RecordSeparatorPolicy is required.");

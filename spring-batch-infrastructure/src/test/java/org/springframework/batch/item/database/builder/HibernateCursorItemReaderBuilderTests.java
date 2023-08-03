@@ -203,8 +203,10 @@ class HibernateCursorItemReaderBuilderTests {
 				() -> new HibernateCursorItemReaderBuilder<Foo>().sessionFactory(this.sessionFactory)
 					.saveState(false)
 					.build());
-		assertEquals("A HibernateQueryProvider, queryName, queryString, "
-				+ "or both the nativeQuery and entityClass must be configured", exception.getMessage());
+		assertEquals("""
+				A HibernateQueryProvider, queryName, queryString, \
+				or both the nativeQuery and entityClass must be configured\
+				""", exception.getMessage());
 	}
 
 	@Configuration

@@ -88,8 +88,10 @@ import org.springframework.util.Assert;
  */
 public class SimpleJobOperator implements JobOperator, InitializingBean {
 
-	private static final String ILLEGAL_STATE_MSG = "Illegal state (only happens on a race condition): "
-			+ "%s with name=%s and parameters=%s";
+	private static final String ILLEGAL_STATE_MSG = """
+			Illegal state (only happens on a race condition): \
+			%s with name=%s and parameters=%s\
+			""";
 
 	private ListableJobLocator jobRegistry;
 
@@ -162,7 +164,7 @@ public class SimpleJobOperator implements JobOperator, InitializingBean {
 	public List<Long> getExecutions(long instanceId) throws NoSuchJobInstanceException {
 		JobInstance jobInstance = jobExplorer.getJobInstance(instanceId);
 		if (jobInstance == null) {
-			throw new NoSuchJobInstanceException(String.format("No job instance with id=%d", instanceId));
+			throw new NoSuchJobInstanceException("No job instance with id=%d".formatted(instanceId));
 		}
 		List<Long> list = new ArrayList<>();
 		for (JobExecution jobExecution : jobExplorer.getJobExecutions(jobInstance)) {
@@ -290,14 +292,14 @@ public class SimpleJobOperator implements JobOperator, InitializingBean {
 		JobParameters parameters = jobExecution.getJobParameters();
 
 		if (logger.isInfoEnabled()) {
-			logger.info(String.format("Attempting to resume job with name=%s and parameters=%s", jobName, parameters));
+			logger.info("Attempting to resume job with name=%s and parameters=%s".formatted(jobName, parameters));
 		}
 		try {
 			return jobLauncher.run(job, parameters).getId();
 		}
 		catch (JobExecutionAlreadyRunningException e) {
 			throw new UnexpectedJobExecutionException(
-					String.format(ILLEGAL_STATE_MSG, "job execution already running", jobName, parameters), e);
+			ILLEGAL_STATE_MSG.formatted("job execution already running", jobName, parameters), e);
 		}
 
 	}
@@ -333,29 +335,29 @@ public class SimpleJobOperator implements JobOperator, InitializingBean {
 
 		if (jobRepository.isJobInstanceExists(jobName, jobParameters)) {
 			throw new JobInstanceAlreadyExistsException(
-					String.format("Cannot start a job instance that already exists with name=%s and parameters={%s}",
-							jobName, parameters));
+			"Cannot start a job instance that already exists with name=%s and parameters={%s}".formatted(
+		jobName, parameters));
 		}
 
 		Job job = jobRegistry.getJob(jobName);
 		if (logger.isInfoEnabled()) {
 			logger
-				.info(String.format("Attempting to launch job with name=%s and parameters={%s}", jobName, parameters));
+				.info("Attempting to launch job with name=%s and parameters={%s}".formatted(jobName, parameters));
 		}
 		try {
 			return jobLauncher.run(job, jobParameters).getId();
 		}
 		catch (JobExecutionAlreadyRunningException e) {
 			throw new UnexpectedJobExecutionException(
-					String.format(ILLEGAL_STATE_MSG, "job execution already running", jobName, parameters), e);
+			ILLEGAL_STATE_MSG.formatted("job execution already running", jobName, parameters), e);
 		}
 		catch (JobRestartException e) {
 			throw new UnexpectedJobExecutionException(
-					String.format(ILLEGAL_STATE_MSG, "job not restartable", jobName, parameters), e);
+			ILLEGAL_STATE_MSG.formatted("job not restartable", jobName, parameters), e);
 		}
 		catch (JobInstanceAlreadyCompleteException e) {
 			throw new UnexpectedJobExecutionException(
-					String.format(ILLEGAL_STATE_MSG, "job already complete", jobName, parameters), e);
+			ILLEGAL_STATE_MSG.formatted("job already complete", jobName, parameters), e);
 		}
 
 	}
@@ -375,22 +377,22 @@ public class SimpleJobOperator implements JobOperator, InitializingBean {
 		Job job = jobRegistry.getJob(jobName);
 		JobParameters parameters = new JobParametersBuilder(jobExplorer).getNextJobParameters(job).toJobParameters();
 		if (logger.isInfoEnabled()) {
-			logger.info(String.format("Attempting to launch job with name=%s and parameters=%s", jobName, parameters));
+			logger.info("Attempting to launch job with name=%s and parameters=%s".formatted(jobName, parameters));
 		}
 		try {
 			return jobLauncher.run(job, parameters).getId();
 		}
 		catch (JobExecutionAlreadyRunningException e) {
 			throw new UnexpectedJobExecutionException(
-					String.format(ILLEGAL_STATE_MSG, "job already running", jobName, parameters), e);
+			ILLEGAL_STATE_MSG.formatted("job already running", jobName, parameters), e);
 		}
 		catch (JobRestartException e) {
 			throw new UnexpectedJobExecutionException(
-					String.format(ILLEGAL_STATE_MSG, "job not restartable", jobName, parameters), e);
+			ILLEGAL_STATE_MSG.formatted("job not restartable", jobName, parameters), e);
 		}
 		catch (JobInstanceAlreadyCompleteException e) {
 			throw new UnexpectedJobExecutionException(
-					String.format(ILLEGAL_STATE_MSG, "job instance already complete", jobName, parameters), e);
+			ILLEGAL_STATE_MSG.formatted("job instance already complete", jobName, parameters), e);
 		}
 
 	}
@@ -417,19 +419,19 @@ public class SimpleJobOperator implements JobOperator, InitializingBean {
 
 		try {
 			Job job = jobRegistry.getJob(jobExecution.getJobInstance().getJobName());
-			if (job instanceof StepLocator) {// can only process as StepLocator is the
+			if (job instanceof StepLocator locator) {// can only process as StepLocator is the
 												// only way to get the step object
 				// get the current stepExecution
 				for (StepExecution stepExecution : jobExecution.getStepExecutions()) {
 					if (stepExecution.getStatus().isRunning()) {
 						try {
 							// have the step execution that's running -> need to 'stop' it
-							Step step = ((StepLocator) job).getStep(stepExecution.getStepName());
-							if (step instanceof TaskletStep) {
-								Tasklet tasklet = ((TaskletStep) step).getTasklet();
-								if (tasklet instanceof StoppableTasklet) {
+							Step step = locator.getStep(stepExecution.getStepName());
+							if (step instanceof TaskletStep taskletStep) {
+								Tasklet tasklet = taskletStep.getTasklet();
+								if (tasklet instanceof StoppableTasklet stoppableTasklet) {
 									StepSynchronizationManager.register(stepExecution);
-									((StoppableTasklet) tasklet).stop();
+									stoppableTasklet.stop();
 									StepSynchronizationManager.release();
 								}
 							}

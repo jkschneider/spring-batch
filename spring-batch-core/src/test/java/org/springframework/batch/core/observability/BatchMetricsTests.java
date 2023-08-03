@@ -164,8 +164,10 @@ class BatchMetricsTests {
 				() -> Metrics.globalRegistry.get("spring.batch.job.active")
 					.tag("spring.batch.job.active.name", "job")
 					.longTaskTimer(),
-				"There should be a meter of type LONG_TASK_TIMER named spring.batch.job.active"
-						+ " registered in the global registry");
+				"""
+				There should be a meter of type LONG_TASK_TIMER named spring.batch.job.active\
+				 registered in the global registry\
+				""");
 
 		// Step 1 (tasklet) metrics
 

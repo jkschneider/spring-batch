@@ -208,7 +208,7 @@ public class Chunk<W> implements Iterable<W>, Serializable {
 	 */
 	@Override
 	public String toString() {
-		return String.format("[items=%s, skips=%s]", items, skips);
+		return "[items=%s, skips=%s]".formatted(items, skips);
 	}
 
 	@Override
@@ -284,7 +284,7 @@ public class Chunk<W> implements Iterable<W>, Serializable {
 
 		@Override
 		public String toString() {
-			return String.format("[items=%s, skips=%s]", items, skips);
+			return "[items=%s, skips=%s]".formatted(items, skips);
 		}
 
 	}

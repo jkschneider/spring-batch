@@ -105,7 +105,7 @@ public class Entity implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return String.format("%s: id=%d, version=%d", ClassUtils.getShortName(getClass()), id, version);
+		return "%s: id=%d, version=%d".formatted(ClassUtils.getShortName(getClass()), id, version);
 	}
 
 	/**

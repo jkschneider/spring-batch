@@ -191,9 +191,9 @@ public class SimpleStepExecutionSplitter implements StepExecutionSplitter, Initi
 			result = partitioner.partition(splitSize);
 		}
 		else {
-			if (partitioner instanceof PartitionNameProvider) {
+			if (partitioner instanceof PartitionNameProvider provider) {
 				result = new HashMap<>();
-				Collection<String> names = ((PartitionNameProvider) partitioner).getPartitionNames(splitSize);
+				Collection<String> names = provider.getPartitionNames(splitSize);
 				for (String name : names) {
 					/*
 					 * We need to return the same keys as the original (failed) execution,
@@ -246,9 +246,12 @@ public class SimpleStepExecutionSplitter implements StepExecutionSplitter, Initi
 		BatchStatus stepStatus = lastStepExecution.getStatus();
 
 		if (stepStatus == BatchStatus.UNKNOWN) {
-			throw new JobExecutionException("Cannot restart step from UNKNOWN status.  "
-					+ "The last execution ended with a failure that could not be rolled back, "
-					+ "so it may be dangerous to proceed.  " + "Manual intervention is probably necessary.");
+			throw new JobExecutionException("""
+					Cannot restart step from UNKNOWN status.  \
+					The last execution ended with a failure that could not be rolled back, \
+					so it may be dangerous to proceed.  \
+					Manual intervention is probably necessary.\
+					""");
 		}
 
 		if (stepStatus == BatchStatus.COMPLETED) {

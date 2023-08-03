@@ -358,7 +358,7 @@ public class JobParameters implements Serializable {
 	public String toString() {
 		List<String> parameters = new ArrayList<>();
 		for (Map.Entry<String, JobParameter<?>> entry : this.parameters.entrySet()) {
-			parameters.add(String.format("'%s':'%s'", entry.getKey(), entry.getValue()));
+			parameters.add("'%s':'%s'".formatted(entry.getKey(), entry.getValue()));
 		}
 		return new StringBuilder("{").append(String.join(",", parameters)).append("}").toString();
 	}

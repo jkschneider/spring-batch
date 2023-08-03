@@ -528,18 +528,20 @@ public class StepExecution extends Entity {
 
 	@Override
 	public String toString() {
-		return String.format(getSummary() + ", exitDescription=%s", exitStatus.getExitDescription());
+		return (getSummary() + ", exitDescription=%s").formatted(exitStatus.getExitDescription());
 	}
 
 	/**
 	 * @return The {@link String} containing a summary of the step execution.
 	 */
 	public String getSummary() {
-		return super.toString() + String.format(
-				", name=%s, status=%s, exitStatus=%s, readCount=%d, filterCount=%d, writeCount=%d readSkipCount=%d, writeSkipCount=%d"
-						+ ", processSkipCount=%d, commitCount=%d, rollbackCount=%d",
-				stepName, status, exitStatus.getExitCode(), readCount, filterCount, writeCount, readSkipCount,
-				writeSkipCount, processSkipCount, commitCount, rollbackCount);
+		return super.toString() + (
+		"""
+		, name=%s, status=%s, exitStatus=%s, readCount=%d, filterCount=%d, writeCount=%d readSkipCount=%d, writeSkipCount=%d\
+		, processSkipCount=%d, commitCount=%d, rollbackCount=%d\
+		""").formatted(
+		stepName, status, exitStatus.getExitCode(), readCount, filterCount, writeCount, readSkipCount,
+		writeSkipCount, processSkipCount, commitCount, rollbackCount);
 	}
 
 }

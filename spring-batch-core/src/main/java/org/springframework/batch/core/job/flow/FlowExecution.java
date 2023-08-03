@@ -63,7 +63,7 @@ public class FlowExecution implements Comparable<FlowExecution> {
 
 	@Override
 	public String toString() {
-		return String.format("FlowExecution: name=%s, status=%s", name, status);
+		return "FlowExecution: name=%s, status=%s".formatted(name, status);
 	}
 
 }

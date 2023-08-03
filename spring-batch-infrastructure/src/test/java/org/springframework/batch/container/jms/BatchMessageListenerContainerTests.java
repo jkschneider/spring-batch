@@ -145,8 +145,8 @@ class BatchMessageListenerContainerTests {
 			throws JMSException, IllegalAccessException {
 		container.setAcceptMessagesWhileStopping(true);
 		container.setMessageListener((MessageListener) arg0 -> {
-			if (t instanceof RuntimeException)
-				throw (RuntimeException) t;
+			if (t instanceof RuntimeException exception)
+				throw exception;
 			else
 				throw (Error) t;
 		});

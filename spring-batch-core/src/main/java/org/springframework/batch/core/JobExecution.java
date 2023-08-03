@@ -380,9 +380,9 @@ public class JobExecution extends Entity {
 	 */
 	@Override
 	public String toString() {
-		return super.toString() + String.format(
-				", startTime=%s, endTime=%s, lastUpdated=%s, status=%s, exitStatus=%s, job=[%s], jobParameters=[%s]",
-				startTime, endTime, lastUpdated, status, exitStatus, jobInstance, jobParameters);
+		return super.toString() + 
+		", startTime=%s, endTime=%s, lastUpdated=%s, status=%s, exitStatus=%s, job=[%s], jobParameters=[%s]".formatted(
+	startTime, endTime, lastUpdated, status, exitStatus, jobInstance, jobParameters);
 	}
 
 	/**

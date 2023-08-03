@@ -73,10 +73,10 @@ public class AsyncItemWriter<T> implements ItemStreamWriter<Future<T>>, Initiali
 			catch (ExecutionException e) {
 				Throwable cause = e.getCause();
 
-				if (cause != null && cause instanceof Exception) {
+				if (cause != null && cause instanceof Exception exception) {
 					logger.debug("An exception was thrown while processing an item", e);
 
-					throw (Exception) cause;
+					throw exception;
 				}
 				else {
 					throw e;
@@ -89,22 +89,22 @@ public class AsyncItemWriter<T> implements ItemStreamWriter<Future<T>>, Initiali
 
 	@Override
 	public void open(ExecutionContext executionContext) throws ItemStreamException {
-		if (delegate instanceof ItemStream) {
-			((ItemStream) delegate).open(executionContext);
+		if (delegate instanceof ItemStream stream) {
+			stream.open(executionContext);
 		}
 	}
 
 	@Override
 	public void update(ExecutionContext executionContext) throws ItemStreamException {
-		if (delegate instanceof ItemStream) {
-			((ItemStream) delegate).update(executionContext);
+		if (delegate instanceof ItemStream stream) {
+			stream.update(executionContext);
 		}
 	}
 
 	@Override
 	public void close() throws ItemStreamException {
-		if (delegate instanceof ItemStream) {
-			((ItemStream) delegate).close();
+		if (delegate instanceof ItemStream stream) {
+			stream.close();
 		}
 	}
 

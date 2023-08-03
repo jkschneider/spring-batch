@@ -359,8 +359,10 @@ public class FaultTolerantChunkProcessor<I, O> extends SimpleChunkProcessor<I, O
 
 				Throwable e = context.getLastThrowable();
 				if (outputs.size() > 1 && !rollbackClassifier.classify(e)) {
-					throw new RetryException("Invalid retry state during write caused by "
-							+ "exception that does not classify for rollback: ", e);
+					throw new RetryException("""
+							Invalid retry state during write caused by \
+							exception that does not classify for rollback: \
+							""", e);
 				}
 
 				Chunk<I>.ChunkIterator inputIterator = inputs.iterator();
@@ -524,11 +526,11 @@ public class FaultTolerantChunkProcessor<I, O> extends SimpleChunkProcessor<I, O
 				throw new RetryException("Non-skippable exception in recoverer", e);
 			}
 			else {
-				if (e instanceof Exception) {
-					throw (Exception) e;
+				if (e instanceof Exception exception) {
+					throw exception;
 				}
-				else if (e instanceof Error) {
-					throw (Error) e;
+				else if (e instanceof Error error) {
+					throw error;
 				}
 				else {
 					throw new RetryException("Non-skippable throwable in recoverer", e);

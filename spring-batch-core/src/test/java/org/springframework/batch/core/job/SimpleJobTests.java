@@ -576,11 +576,11 @@ class SimpleJobTests {
 			jobRepository.update(stepExecution);
 			jobRepository.updateExecutionContext(stepExecution);
 
-			if (exception instanceof JobInterruptedException) {
+			if (exception instanceof JobInterruptedException interruptedException) {
 				stepExecution.setExitStatus(ExitStatus.FAILED);
-				stepExecution.setStatus(((JobInterruptedException) exception).getStatus());
+				stepExecution.setStatus(interruptedException.getStatus());
 				stepExecution.addFailureException(exception);
-				throw (JobInterruptedException) exception;
+				throw interruptedException;
 			}
 			if (exception instanceof RuntimeException) {
 				stepExecution.setExitStatus(ExitStatus.FAILED);

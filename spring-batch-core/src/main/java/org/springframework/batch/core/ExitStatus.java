@@ -194,7 +194,7 @@ public class ExitStatus implements Serializable, Comparable<ExitStatus> {
 	 */
 	@Override
 	public String toString() {
-		return String.format("exitCode=%s;exitDescription=%s", exitCode, exitDescription);
+		return "exitCode=%s;exitDescription=%s".formatted(exitCode, exitDescription);
 	}
 
 	/**

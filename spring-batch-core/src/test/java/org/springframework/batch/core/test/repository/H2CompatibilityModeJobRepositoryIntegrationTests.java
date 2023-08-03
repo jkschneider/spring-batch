@@ -72,8 +72,8 @@ class H2CompatibilityModeJobRepositoryIntegrationTests {
 	}
 
 	private static DataSource buildDataSource(ModeEnum compatibilityMode) {
-		var connectionUrl = String.format("jdbc:h2:mem:%s;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false;MODE=%s",
-				UUID.randomUUID(), compatibilityMode);
+		var connectionUrl = "jdbc:h2:mem:%s;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false;MODE=%s".formatted(
+		UUID.randomUUID(), compatibilityMode);
 		var dataSource = new SimpleDriverDataSource(new org.h2.Driver(), connectionUrl, "sa", "");
 		var populator = new ResourceDatabasePopulator();
 		var resource = new DefaultResourceLoader().getResource("/org/springframework/batch/core/schema-h2.sql");

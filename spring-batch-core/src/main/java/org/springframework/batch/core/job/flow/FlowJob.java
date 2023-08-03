@@ -96,13 +96,13 @@ public class FlowJob extends AbstractJob {
 					map.put(name, locator.getStep(name));
 				}
 			}
-			else if (state instanceof StepHolder) {
-				Step step = ((StepHolder) state).getStep();
+			else if (state instanceof StepHolder holder) {
+				Step step = holder.getStep();
 				String name = step.getName();
 				stepMap.put(name, step);
 			}
-			else if (state instanceof FlowHolder) {
-				for (Flow subflow : ((FlowHolder) state).getFlows()) {
+			else if (state instanceof FlowHolder holder) {
+				for (Flow subflow : holder.getFlows()) {
 					findSteps(subflow, map);
 				}
 			}

@@ -82,7 +82,7 @@ class AlmostStatefulRetryChunkTests {
 		if (retryAttempts <= retryLimit) {
 			try {
 				// N.B. a classic stateful retry goes straight to recovery here
-				logger.debug(String.format("Retry (attempts=%d) chunk: %s", retryAttempts, chunk));
+				logger.debug("Retry (attempts=%d) chunk: %s".formatted(retryAttempts, chunk));
 				doWrite(chunk.getItems());
 				retryAttempts = 0;
 			}
@@ -94,7 +94,7 @@ class AlmostStatefulRetryChunkTests {
 		}
 		else {
 			try {
-				logger.debug(String.format("Recover (attempts=%d) chunk: %s", retryAttempts, chunk));
+				logger.debug("Recover (attempts=%d) chunk: %s".formatted(retryAttempts, chunk));
 				recover(chunk);
 			}
 			finally {

@@ -141,8 +141,8 @@ public class MultiResourceItemReader<T> extends AbstractItemStreamItemReader<T> 
 
 	private T readFromDelegate() throws Exception {
 		T item = delegate.read();
-		if (item instanceof ResourceAware) {
-			((ResourceAware) item).setResource(resources[currentResource]);
+		if (item instanceof ResourceAware aware) {
+			aware.setResource(resources[currentResource]);
 		}
 		return item;
 	}

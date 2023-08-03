@@ -384,16 +384,16 @@ public class SimpleStepBuilder<I, O> extends AbstractTaskletStepBuilder<SimpleSt
 	protected void registerAsStreamsAndListeners(ItemReader<? extends I> itemReader,
 			ItemProcessor<? super I, ? extends O> itemProcessor, ItemWriter<? super O> itemWriter) {
 		for (Object itemHandler : new Object[] { itemReader, itemWriter, itemProcessor }) {
-			if (itemHandler instanceof ItemStream) {
-				stream((ItemStream) itemHandler);
+			if (itemHandler instanceof ItemStream stream) {
+				stream(stream);
 			}
 			if (StepListenerFactoryBean.isListener(itemHandler)) {
 				StepListener listener = StepListenerFactoryBean.getListener(itemHandler);
-				if (listener instanceof StepExecutionListener) {
-					listener((StepExecutionListener) listener);
+				if (listener instanceof StepExecutionListener executionListener) {
+					listener(executionListener);
 				}
-				if (listener instanceof ChunkListener) {
-					listener((ChunkListener) listener);
+				if (listener instanceof ChunkListener chunkListener) {
+					listener(chunkListener);
 				}
 				if (listener instanceof ItemReadListener<?> || listener instanceof ItemProcessListener<?, ?>
 						|| listener instanceof ItemWriteListener<?>) {

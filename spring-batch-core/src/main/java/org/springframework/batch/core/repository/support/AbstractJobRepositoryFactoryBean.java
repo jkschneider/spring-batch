@@ -198,8 +198,10 @@ public abstract class AbstractJobRepositoryFactoryBean implements FactoryBean<Jo
 		if (this.validateTransactionState) {
 			DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor((MethodInterceptor) invocation -> {
 				if (TransactionSynchronizationManager.isActualTransactionActive()) {
-					throw new IllegalStateException("Existing transaction detected in JobRepository. "
-							+ "Please fix this and try again (e.g. remove @Transactional annotations from client).");
+					throw new IllegalStateException("""
+							Existing transaction detected in JobRepository. \
+							Please fix this and try again (e.g. remove @Transactional annotations from client).\
+							""");
 				}
 				return invocation.proceed();
 			});

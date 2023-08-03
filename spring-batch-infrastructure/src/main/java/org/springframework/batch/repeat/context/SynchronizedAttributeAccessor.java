@@ -63,11 +63,11 @@ public class SynchronizedAttributeAccessor implements AttributeAccessor {
 			return true;
 		}
 		AttributeAccessorSupport that;
-		if (other instanceof SynchronizedAttributeAccessor) {
-			that = ((SynchronizedAttributeAccessor) other).support;
+		if (other instanceof SynchronizedAttributeAccessor accessor) {
+			that = accessor.support;
 		}
-		else if (other instanceof AttributeAccessorSupport) {
-			that = (AttributeAccessorSupport) other;
+		else if (other instanceof AttributeAccessorSupport accessorSupport) {
+			that = accessorSupport;
 		}
 		else {
 			return false;

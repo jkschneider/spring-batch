@@ -46,10 +46,12 @@ import static org.springframework.test.util.ReflectionTestUtils.getField;
 @ExtendWith(MockitoExtension.class)
 class StaxEventItemReaderBuilderTests {
 
-	private static final String SIMPLE_XML = "<foos><foo><first>1</first>"
-			+ "<second>two</second><third>three</third></foo><foo><first>4</first>"
-			+ "<second>five</second><third>six</third></foo><foo><first>7</first>"
-			+ "<second>eight</second><third>nine</third></foo></foos>";
+	private static final String SIMPLE_XML = """
+			<foos><foo><first>1</first>\
+			<second>two</second><third>three</third></foo><foo><first>4</first>\
+			<second>five</second><third>six</third></foo><foo><first>7</first>\
+			<second>eight</second><third>nine</third></foo></foos>\
+			""";
 
 	@Mock
 	private Resource resource;
@@ -236,7 +238,7 @@ class StaxEventItemReaderBuilderTests {
 
 		@Override
 		public String toString() {
-			return String.format("{%s, %s, %s}", this.first, this.second, this.third);
+			return "{%s, %s, %s}".formatted(this.first, this.second, this.third);
 		}
 
 	}

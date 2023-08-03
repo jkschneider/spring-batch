@@ -78,10 +78,10 @@ public class JdbcJobInstanceDaoTests extends AbstractJobInstanceDaoTests {
 		byte[] bytes = digest.digest("f78spx".getBytes(StandardCharsets.UTF_8));
 		StringBuilder output = new StringBuilder();
 		for (byte bite : bytes) {
-			output.append(String.format("%02x", bite));
+			output.append("%02x".formatted(bite));
 		}
 		assertEquals(32, output.length(), "Wrong hash: " + output);
-		String value = String.format("%032x", new BigInteger(1, bytes));
+		String value = "%032x".formatted(new BigInteger(1, bytes));
 		assertEquals(32, value.length(), "Wrong hash: " + value);
 		assertEquals(value, output.toString());
 	}

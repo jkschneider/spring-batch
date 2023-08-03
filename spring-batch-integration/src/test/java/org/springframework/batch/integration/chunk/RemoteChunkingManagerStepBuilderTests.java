@@ -198,9 +198,12 @@ class RemoteChunkingManagerStepBuilderTests {
 
 		// then
 		assertThat(expectedException).hasMessage(
-				"When configuring a manager " + "step for remote chunking, the item writer will be automatically "
-						+ "set to an instance of ChunkMessageChannelItemWriter. "
-						+ "The item writer must not be provided in this case.");
+				"""
+				When configuring a manager \
+				step for remote chunking, the item writer will be automatically \
+				set to an instance of ChunkMessageChannelItemWriter. \
+				The item writer must not be provided in this case.\
+				""");
 	}
 
 	@Test

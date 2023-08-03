@@ -205,8 +205,8 @@ public class StepContext extends SynchronizedAttributeAccessor {
 		}
 
 		Exception error = errors.get(0);
-		if (error instanceof RuntimeException) {
-			throw (RuntimeException) error;
+		if (error instanceof RuntimeException exception) {
+			throw exception;
 		}
 		else {
 			throw new UnexpectedJobExecutionException(
@@ -227,7 +227,10 @@ public class StepContext extends SynchronizedAttributeAccessor {
 	 */
 	public String getId() {
 		Assert.state(stepExecution.getId() != null,
-				"StepExecution has no id.  " + "It must be saved before it can be used in step scope.");
+				"""
+				StepExecution has no id.  \
+				It must be saved before it can be used in step scope.\
+				""");
 		return "execution#" + stepExecution.getId();
 	}
 

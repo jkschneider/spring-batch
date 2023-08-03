@@ -68,8 +68,8 @@ public abstract class AssertFile {
 			while (expectedReader.readLine() != null) {
 				lineCount++;
 			}
-			Assert.state(expectedLineCount == lineCount, String
-				.format("Line count of %d does not match expected count of %d", lineCount, expectedLineCount));
+			Assert.state(expectedLineCount == lineCount, "Line count of %d does not match expected count of %d"
+			.formatted(lineCount, expectedLineCount));
 		}
 		finally {
 			expectedReader.close();

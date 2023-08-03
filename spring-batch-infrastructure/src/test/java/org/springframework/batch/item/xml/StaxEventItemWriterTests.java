@@ -801,8 +801,10 @@ class StaxEventItemWriterTests {
 		writer.close();
 		String content = getOutputFileContent();
 
-		assertEquals("<ns:testroot xmlns:ns=\"https://www.springframework.org/test\">"
-				+ "<ns:group><StaxEventItemWriter-testString/><StaxEventItemWriter-testString/></ns:group></ns:testroot>",
+		assertEquals("""
+				<ns:testroot xmlns:ns="https://www.springframework.org/test">\
+				<ns:group><StaxEventItemWriter-testString/><StaxEventItemWriter-testString/></ns:group></ns:testroot>\
+				""",
 				content, "Wrong content: " + content);
 	}
 
@@ -824,11 +826,13 @@ class StaxEventItemWriterTests {
 		writer.close();
 		String content = getOutputFileContent();
 
-		assertEquals("<ns:testroot xmlns:ns=\"https://www.springframework.org/test\">"
-				+ "<preHeader>PRE-HEADER</preHeader><ns:group><subGroup><postHeader>POST-HEADER</postHeader>"
-				+ "<StaxEventItemWriter-testString/><StaxEventItemWriter-testString/>"
-				+ "<preFooter>PRE-FOOTER</preFooter></subGroup></ns:group><postFooter>POST-FOOTER</postFooter>"
-				+ "</ns:testroot>", content, "Wrong content: " + content);
+		assertEquals("""
+				<ns:testroot xmlns:ns="https://www.springframework.org/test">\
+				<preHeader>PRE-HEADER</preHeader><ns:group><subGroup><postHeader>POST-HEADER</postHeader>\
+				<StaxEventItemWriter-testString/><StaxEventItemWriter-testString/>\
+				<preFooter>PRE-FOOTER</preFooter></subGroup></ns:group><postFooter>POST-FOOTER</postFooter>\
+				</ns:testroot>\
+				""", content, "Wrong content: " + content);
 	}
 
 	private void initWriterForSimpleCallbackTests() throws Exception {

@@ -507,8 +507,10 @@ class FlatFileItemReaderBuilderTests {
 		Exception exception = assertThrows(IllegalStateException.class, builder::build);
 		String message = exception.getMessage();
 		if (message.equals("No LineTokenizer implementation was provided.")) {
-			fail("Error message should not be 'No LineTokenizer implementation was provided.' "
-					+ " when a LineTokenizer is provided");
+			fail("""
+					Error message should not be 'No LineTokenizer implementation was provided.' \
+					 when a LineTokenizer is provided\
+					""");
 		}
 		assertEquals("No FieldSetMapper implementation was provided.", message);
 	}

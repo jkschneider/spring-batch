@@ -94,8 +94,8 @@ public class StepState extends AbstractState implements StepLocator, StepHolder 
 
 		names.add(step.getName());
 
-		if (step instanceof StepLocator) {
-			names.addAll(((StepLocator) step).getStepNames());
+		if (step instanceof StepLocator locator) {
+			names.addAll(locator.getStepNames());
 		}
 
 		return names;
@@ -113,8 +113,8 @@ public class StepState extends AbstractState implements StepLocator, StepHolder 
 		if (step.getName().equals(stepName)) {
 			result = step;
 		}
-		else if (step instanceof StepLocator) {
-			result = ((StepLocator) step).getStep(stepName);
+		else if (step instanceof StepLocator locator) {
+			result = locator.getStep(stepName);
 		}
 
 		return result;

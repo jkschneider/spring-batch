@@ -110,8 +110,8 @@ class PartitionFileJobFunctionalTests implements ApplicationContextAware {
 	 * Open the reader if applicable.
 	 */
 	private void open(ItemReader<?> reader) {
-		if (reader instanceof ItemStream) {
-			((ItemStream) reader).open(new ExecutionContext());
+		if (reader instanceof ItemStream stream) {
+			stream.open(new ExecutionContext());
 		}
 	}
 
@@ -119,8 +119,8 @@ class PartitionFileJobFunctionalTests implements ApplicationContextAware {
 	 * Close the reader if applicable.
 	 */
 	private void close(ItemReader<?> reader) {
-		if (reader instanceof ItemStream) {
-			((ItemStream) reader).close();
+		if (reader instanceof ItemStream stream) {
+			stream.close();
 		}
 	}
 

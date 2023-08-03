@@ -527,8 +527,10 @@ public class FlatFileItemWriterBuilder<T> {
 		}
 
 		if (this.resource == null) {
-			logger.debug("The resource is null. This is only a valid scenario when "
-					+ "injecting it later as in when using the MultiResourceItemWriter");
+			logger.debug("""
+					The resource is null. This is only a valid scenario when \
+					injecting it later as in when using the MultiResourceItemWriter\
+					""");
 		}
 
 		FlatFileItemWriter<T> writer = new FlatFileItemWriter<>();

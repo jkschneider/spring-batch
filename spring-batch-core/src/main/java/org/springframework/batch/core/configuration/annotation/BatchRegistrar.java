@@ -71,15 +71,17 @@ class BatchRegistrar implements ImportBeanDefinitionRegistrar {
 	private void validateState(AnnotationMetadata importingClassMetadata) {
 		if (!importingClassMetadata.isAnnotated(EnableBatchProcessing.class.getName())) {
 			String className = importingClassMetadata.getClassName();
-			String errorMessage = String.format(MISSING_ANNOTATION_ERROR_MESSAGE, className);
+			String errorMessage = MISSING_ANNOTATION_ERROR_MESSAGE.formatted(className);
 			throw new IllegalStateException(errorMessage);
 		}
 	}
 
 	private void registerJobRepository(BeanDefinitionRegistry registry, EnableBatchProcessing batchAnnotation) {
 		if (registry.containsBeanDefinition("jobRepository")) {
-			LOGGER.info("Bean jobRepository already defined in the application context, skipping"
-					+ " the registration of a jobRepository");
+			LOGGER.info("""
+					Bean jobRepository already defined in the application context, skipping\
+					 the registration of a jobRepository\
+					""");
 			return;
 		}
 		BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder
@@ -135,8 +137,10 @@ class BatchRegistrar implements ImportBeanDefinitionRegistrar {
 
 	private void registerJobExplorer(BeanDefinitionRegistry registry, EnableBatchProcessing batchAnnotation) {
 		if (registry.containsBeanDefinition("jobExplorer")) {
-			LOGGER.info("Bean jobExplorer already defined in the application context, skipping"
-					+ " the registration of a jobExplorer");
+			LOGGER.info("""
+					Bean jobExplorer already defined in the application context, skipping\
+					 the registration of a jobExplorer\
+					""");
 			return;
 		}
 		BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder
@@ -179,8 +183,10 @@ class BatchRegistrar implements ImportBeanDefinitionRegistrar {
 
 	private void registerJobLauncher(BeanDefinitionRegistry registry, EnableBatchProcessing batchAnnotation) {
 		if (registry.containsBeanDefinition("jobLauncher")) {
-			LOGGER.info("Bean jobLauncher already defined in the application context, skipping"
-					+ " the registration of a jobLauncher");
+			LOGGER.info("""
+					Bean jobLauncher already defined in the application context, skipping\
+					 the registration of a jobLauncher\
+					""");
 			return;
 		}
 		BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder
@@ -198,8 +204,10 @@ class BatchRegistrar implements ImportBeanDefinitionRegistrar {
 
 	private void registerJobRegistry(BeanDefinitionRegistry registry) {
 		if (registry.containsBeanDefinition("jobRegistry")) {
-			LOGGER.info("Bean jobRegistry already defined in the application context, skipping"
-					+ " the registration of a jobRegistry");
+			LOGGER.info("""
+					Bean jobRegistry already defined in the application context, skipping\
+					 the registration of a jobRegistry\
+					""");
 			return;
 		}
 		BeanDefinition beanDefinition = BeanDefinitionBuilder.genericBeanDefinition(MapJobRegistry.class)
@@ -209,8 +217,10 @@ class BatchRegistrar implements ImportBeanDefinitionRegistrar {
 
 	private void registerJobOperator(BeanDefinitionRegistry registry, EnableBatchProcessing batchAnnotation) {
 		if (registry.containsBeanDefinition("jobOperator")) {
-			LOGGER.info("Bean jobOperator already defined in the application context, skipping"
-					+ " the registration of a jobOperator");
+			LOGGER.info("""
+					Bean jobOperator already defined in the application context, skipping\
+					 the registration of a jobOperator\
+					""");
 			return;
 		}
 		BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder
@@ -232,8 +242,10 @@ class BatchRegistrar implements ImportBeanDefinitionRegistrar {
 			return;
 		}
 		if (registry.containsBeanDefinition("jobRegistrar")) {
-			LOGGER.info("Bean jobRegistrar already defined in the application context, skipping"
-					+ " the registration of a jobRegistrar");
+			LOGGER.info("""
+					Bean jobRegistrar already defined in the application context, skipping\
+					 the registration of a jobRegistrar\
+					""");
 			return;
 		}
 		BeanDefinition jobLoaderBeanDefinition = BeanDefinitionBuilder.genericBeanDefinition(DefaultJobLoader.class)

@@ -65,8 +65,8 @@ public class DefaultPropertyEditorRegistrar implements PropertyEditorRegistrar {
 		for (Entry<?, ? extends PropertyEditor> entry : customEditors.entrySet()) {
 			Object key = entry.getKey();
 			Class<?> requiredType;
-			if (key instanceof Class<?>) {
-				requiredType = (Class<?>) key;
+			if (key instanceof Class<?> class1) {
+				requiredType = class1;
 			}
 			else if (key instanceof String className) {
 				requiredType = ClassUtils.resolveClassName(className, getClass().getClassLoader());

@@ -400,8 +400,8 @@ public abstract class AbstractCursorItemReader<T> extends AbstractItemCountingIt
 			this.con.setAutoCommit(this.initialConnectionAutoCommit);
 		}
 
-		if (useSharedExtendedConnection && dataSource instanceof ExtendedConnectionDataSourceProxy) {
-			((ExtendedConnectionDataSourceProxy) dataSource).stopCloseSuppression(this.con);
+		if (useSharedExtendedConnection && dataSource instanceof ExtendedConnectionDataSourceProxy proxy) {
+			proxy.stopCloseSuppression(this.con);
 			if (!TransactionSynchronizationManager.isActualTransactionActive()) {
 				DataSourceUtils.releaseConnection(con, dataSource);
 			}
@@ -440,8 +440,10 @@ public abstract class AbstractCursorItemReader<T> extends AbstractItemCountingIt
 			if (useSharedExtendedConnection) {
 				if (!(getDataSource() instanceof ExtendedConnectionDataSourceProxy)) {
 					throw new InvalidDataAccessApiUsageException(
-							"You must use a ExtendedConnectionDataSourceProxy for the dataSource when "
-									+ "useSharedExtendedConnection is set to true.");
+							"""
+							You must use a ExtendedConnectionDataSourceProxy for the dataSource when \
+							useSharedExtendedConnection is set to true.\
+							""");
 				}
 				this.con = DataSourceUtils.getConnection(dataSource);
 				((ExtendedConnectionDataSourceProxy) dataSource).startCloseSuppression(this.con);
@@ -513,8 +515,10 @@ public abstract class AbstractCursorItemReader<T> extends AbstractItemCountingIt
 			catch (SQLException e) {
 				// Driver does not support rs.absolute(int) revert to
 				// traversing ResultSet
-				log.warn("The JDBC driver does not appear to support ResultSet.absolute(). Consider"
-						+ " reverting to the default behavior setting the driverSupportsAbsolute to false", e);
+				log.warn("""
+						The JDBC driver does not appear to support ResultSet.absolute(). Consider\
+						 reverting to the default behavior setting the driverSupportsAbsolute to false\
+						""", e);
 
 				moveCursorToRow(itemIndex);
 			}

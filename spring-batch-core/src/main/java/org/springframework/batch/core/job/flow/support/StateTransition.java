@@ -166,8 +166,8 @@ public final class StateTransition {
 	 */
 	@Override
 	public String toString() {
-		return String.format("StateTransition: [state=%s, pattern=%s, next=%s]", state == null ? null : state.getName(),
-				pattern, next);
+		return "StateTransition: [state=%s, pattern=%s, next=%s]".formatted(state == null ? null : state.getName(),
+		pattern, next);
 	}
 
 }

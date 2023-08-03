@@ -147,8 +147,8 @@ public class TaskletStep extends AbstractStep {
 	 */
 	public void setTasklet(Tasklet tasklet) {
 		this.tasklet = tasklet;
-		if (tasklet instanceof StepExecutionListener) {
-			registerStepExecutionListener((StepExecutionListener) tasklet);
+		if (tasklet instanceof StepExecutionListener listener) {
+			registerStepExecutionListener(listener);
 		}
 	}
 
@@ -338,8 +338,10 @@ public class TaskletStep extends AbstractStep {
 					if (stepExecutionUpdated) {
 						// Wah! the commit failed. We need to rescue the step
 						// execution data.
-						logger.info("Commit failed while step execution data was already updated. "
-								+ "Reverting to old version.");
+						logger.info("""
+								Commit failed while step execution data was already updated. \
+								Reverting to old version.\
+								""");
 						copy(oldVersion, stepExecution);
 						if (status == TransactionSynchronization.STATUS_ROLLED_BACK) {
 							rollback(stepExecution);

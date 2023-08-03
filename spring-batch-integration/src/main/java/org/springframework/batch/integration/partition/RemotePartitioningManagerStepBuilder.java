@@ -316,10 +316,13 @@ public class RemotePartitioningManagerStepBuilder extends PartitionStepBuilder {
 	@Override
 	public RemotePartitioningManagerStepBuilder partitionHandler(PartitionHandler partitionHandler)
 			throws UnsupportedOperationException {
-		throw new UnsupportedOperationException("When configuring a manager step "
-				+ "for remote partitioning using the RemotePartitioningManagerStepBuilder, "
-				+ "the partition handler will be automatically set to an instance "
-				+ "of MessageChannelPartitionHandler. The partition handler must " + "not be provided in this case.");
+		throw new UnsupportedOperationException("""
+				When configuring a manager step \
+				for remote partitioning using the RemotePartitioningManagerStepBuilder, \
+				the partition handler will be automatically set to an instance \
+				of MessageChannelPartitionHandler. The partition handler must \
+				not be provided in this case.\
+				""");
 	}
 
 }

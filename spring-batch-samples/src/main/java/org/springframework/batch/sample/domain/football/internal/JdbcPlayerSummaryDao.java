@@ -27,10 +27,12 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 public class JdbcPlayerSummaryDao implements ItemWriter<PlayerSummary> {
 
-	private static final String INSERT_SUMMARY = "INSERT into PLAYER_SUMMARY(ID, YEAR_NO, COMPLETES, ATTEMPTS, PASSING_YARDS, PASSING_TD, "
-			+ "INTERCEPTIONS, RUSHES, RUSH_YARDS, RECEPTIONS, RECEPTIONS_YARDS, TOTAL_TD) "
-			+ "values(:id, :year, :completes, :attempts, :passingYards, :passingTd, "
-			+ ":interceptions, :rushes, :rushYards, :receptions, :receptionYards, :totalTd)";
+	private static final String INSERT_SUMMARY = """
+			INSERT into PLAYER_SUMMARY(ID, YEAR_NO, COMPLETES, ATTEMPTS, PASSING_YARDS, PASSING_TD, \
+			INTERCEPTIONS, RUSHES, RUSH_YARDS, RECEPTIONS, RECEPTIONS_YARDS, TOTAL_TD) \
+			values(:id, :year, :completes, :attempts, :passingYards, :passingTd, \
+			:interceptions, :rushes, :rushYards, :receptions, :receptionYards, :totalTd)\
+			""";
 
 	private NamedParameterJdbcOperations namedParameterJdbcTemplate;
 

@@ -114,10 +114,10 @@ public class SimpleMethodInvoker implements MethodInvoker {
 	}
 
 	private Object extractTarget(Object target, Method method) {
-		if (target instanceof Advised) {
+		if (target instanceof Advised advised) {
 			Object source;
 			try {
-				source = ((Advised) target).getTargetSource().getTarget();
+				source = advised.getTargetSource().getTarget();
 			}
 			catch (Exception e) {
 				throw new IllegalStateException("Could not extract target from proxy", e);

@@ -215,8 +215,10 @@ public class StaxEventItemReaderBuilder<T> {
 		StaxEventItemReader<T> reader = new StaxEventItemReader<>();
 
 		if (this.resource == null) {
-			logger.debug("The resource is null. This is only a valid scenario when "
-					+ "injecting resource later as in when using the MultiResourceItemReader");
+			logger.debug("""
+					The resource is null. This is only a valid scenario when \
+					injecting resource later as in when using the MultiResourceItemReader\
+					""");
 		}
 
 		if (this.saveState) {

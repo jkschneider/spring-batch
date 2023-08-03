@@ -75,8 +75,8 @@ public class RepeatOperationsInterceptor implements MethodInterceptor {
 				try {
 
 					MethodInvocation clone = invocation;
-					if (invocation instanceof ProxyMethodInvocation) {
-						clone = ((ProxyMethodInvocation) invocation).invocableClone();
+					if (invocation instanceof ProxyMethodInvocation methodInvocation) {
+						clone = methodInvocation.invocableClone();
 					}
 					else {
 						throw new IllegalStateException(
@@ -98,8 +98,8 @@ public class RepeatOperationsInterceptor implements MethodInterceptor {
 					}
 				}
 				catch (Throwable e) {
-					if (e instanceof Exception) {
-						throw (Exception) e;
+					if (e instanceof Exception exception) {
+						throw exception;
 					}
 					else {
 						throw new RepeatOperationsInterceptorException("Unexpected error in batch interceptor", e);
@@ -122,7 +122,7 @@ public class RepeatOperationsInterceptor implements MethodInterceptor {
 	}
 
 	private boolean isComplete(Object result) {
-		return result == null || (result instanceof Boolean) && !(Boolean) result;
+		return result == null || (result instanceof Boolean b) && !b;
 	}
 
 	/**

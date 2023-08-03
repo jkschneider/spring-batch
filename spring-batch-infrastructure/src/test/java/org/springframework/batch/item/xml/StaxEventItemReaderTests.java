@@ -696,8 +696,8 @@ class StaxEventItemReaderTests {
 			List<XMLEvent> events = new ArrayList<>();
 			do {
 				eventInsideFragment = eventReader.peek();
-				if (eventInsideFragment instanceof EndElement
-						&& fragmentName.equals(((EndElement) eventInsideFragment).getName())) {
+				if (eventInsideFragment instanceof EndElement element
+						&& fragmentName.equals(element.getName())) {
 					break;
 				}
 				events.add(eventReader.nextEvent());

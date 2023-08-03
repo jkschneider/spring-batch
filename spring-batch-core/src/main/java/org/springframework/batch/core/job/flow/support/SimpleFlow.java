@@ -174,7 +174,7 @@ public class SimpleFlow implements Flow, InitializingBean {
 			catch (Exception e) {
 				executor.close(new FlowExecution(stateName, status));
 				throw new FlowExecutionException(
-						String.format("Ended flow=%s at state=%s with exception", name, stateName), e);
+				"Ended flow=%s at state=%s with exception".formatted(name, stateName), e);
 			}
 
 			if (logger.isDebugEnabled()) {
@@ -211,7 +211,7 @@ public class SimpleFlow implements Flow, InitializingBean {
 
 		if (set == null) {
 			throw new FlowExecutionException(
-					String.format("No transitions found in flow=%s for state=%s", getName(), stateName));
+			"No transitions found in flow=%s for state=%s".formatted(getName(), stateName));
 		}
 
 		String next = null;
@@ -231,13 +231,13 @@ public class SimpleFlow implements Flow, InitializingBean {
 
 		if (next == null) {
 			throw new FlowExecutionException(
-					String.format("Next state not found in flow=%s for state=%s with exit status=%s", getName(),
-							stateName, status.getName()));
+			"Next state not found in flow=%s for state=%s with exit status=%s".formatted(getName(),
+		stateName, status.getName()));
 		}
 
 		if (!stateMap.containsKey(next)) {
 			throw new FlowExecutionException(
-					String.format("Next state not specified in flow=%s for next=%s", getName(), next));
+			"Next state not specified in flow=%s for next=%s".formatted(getName(), next));
 		}
 
 		return stateMap.get(next);

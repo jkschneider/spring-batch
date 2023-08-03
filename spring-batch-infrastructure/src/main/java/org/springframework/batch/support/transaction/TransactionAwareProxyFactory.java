@@ -89,23 +89,23 @@ public class TransactionAwareProxyFactory<T> {
 		// Unfortunately in Java 5 this method has to synchronized
 		// (works OK without in Java 6).
 		synchronized (target) {
-			if (target instanceof List) {
+			if (target instanceof List list) {
 				if (appendOnly) {
 					return (T) new ArrayList();
 				}
-				return (T) new ArrayList((List) target);
+				return (T) new ArrayList(list);
 			}
-			else if (target instanceof Set) {
+			else if (target instanceof Set set) {
 				if (appendOnly) {
 					return (T) new HashSet();
 				}
-				return (T) new HashSet((Set) target);
+				return (T) new HashSet(set);
 			}
-			else if (target instanceof Map) {
+			else if (target instanceof Map map) {
 				if (appendOnly) {
 					return (T) new HashMap();
 				}
-				return (T) new HashMap((Map) target);
+				return (T) new HashMap(map);
 			}
 			else {
 				throw new UnsupportedOperationException("Cannot copy target for this type: " + target.getClass());
@@ -124,11 +124,11 @@ public class TransactionAwareProxyFactory<T> {
 		// Unfortunately in Java 5 this method has to be synchronized
 		// (works OK without in Java 6).
 		synchronized (target) {
-			if (target instanceof Collection) {
+			if (target instanceof Collection collection) {
 				if (!appendOnly) {
-					((Collection) target).clear();
+					collection.clear();
 				}
-				((Collection) target).addAll((Collection) copy);
+				collection.addAll((Collection) copy);
 			}
 			else {
 				if (!appendOnly) {
@@ -246,8 +246,8 @@ public class TransactionAwareProxyFactory<T> {
 					// in the cache...
 					return invocation.proceed();
 				}
-				if (result instanceof Collection<?>) {
-					HashSet<Object> set = new HashSet<>((Collection<?>) result);
+				if (result instanceof Collection<?> collection) {
+					HashSet<Object> set = new HashSet<>(collection);
 					set.addAll((Collection<?>) invocation.proceed());
 					result = set;
 				}

@@ -100,7 +100,7 @@ class JdbcPagingItemReaderAsyncTests {
 			}
 		}
 		if (!throwables.isEmpty()) {
-			throw new IllegalStateException(String.format("Failed %d out of %d", throwables.size(), max),
+			throw new IllegalStateException("Failed %d out of %d".formatted(throwables.size(), max),
 					throwables.get(0));
 		}
 	}

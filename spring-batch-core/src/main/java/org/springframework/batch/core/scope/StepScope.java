@@ -106,7 +106,7 @@ public class StepScope extends BatchScopeSupport {
 				if (scopedObject == null) {
 
 					if (logger.isDebugEnabled()) {
-						logger.debug(String.format("Creating object in scope=%s, name=%s", this.getName(), name));
+						logger.debug("Creating object in scope=%s, name=%s".formatted(this.getName(), name));
 					}
 
 					scopedObject = objectFactory.getObject();
@@ -136,7 +136,7 @@ public class StepScope extends BatchScopeSupport {
 	public void registerDestructionCallback(String name, Runnable callback) {
 		StepContext context = getContext();
 		if (logger.isDebugEnabled()) {
-			logger.debug(String.format("Registered destruction callback in scope=%s, name=%s", this.getName(), name));
+			logger.debug("Registered destruction callback in scope=%s, name=%s".formatted(this.getName(), name));
 		}
 		context.registerDestructionCallback(name, callback);
 	}
@@ -148,7 +148,7 @@ public class StepScope extends BatchScopeSupport {
 	public Object remove(String name) {
 		StepContext context = getContext();
 		if (logger.isDebugEnabled()) {
-			logger.debug(String.format("Removing from scope=%s, name=%s", this.getName(), name));
+			logger.debug("Removing from scope=%s, name=%s".formatted(this.getName(), name));
 		}
 		return context.removeAttribute(name);
 	}

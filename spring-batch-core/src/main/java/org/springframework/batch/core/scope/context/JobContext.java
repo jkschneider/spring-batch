@@ -165,8 +165,8 @@ public class JobContext extends SynchronizedAttributeAccessor {
 		}
 
 		Exception error = errors.get(0);
-		if (error instanceof RuntimeException) {
-			throw (RuntimeException) error;
+		if (error instanceof RuntimeException exception) {
+			throw exception;
 		}
 		else {
 			throw new UnexpectedJobExecutionException(
@@ -187,7 +187,10 @@ public class JobContext extends SynchronizedAttributeAccessor {
 	 */
 	public String getId() {
 		Assert.state(jobExecution.getId() != null,
-				"JobExecution has no id.  " + "It must be saved before it can be used in job scope.");
+				"""
+				JobExecution has no id.  \
+				It must be saved before it can be used in job scope.\
+				""");
 		return "jobExecution#" + jobExecution.getId();
 	}
 

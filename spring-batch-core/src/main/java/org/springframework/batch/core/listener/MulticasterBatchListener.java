@@ -78,11 +78,11 @@ public class MulticasterBatchListener<T, S> implements StepExecutionListener, Ch
 	 * @param listener the {@link StepListener} instance to be registered.
 	 */
 	public void register(StepListener listener) {
-		if (listener instanceof StepExecutionListener) {
-			this.stepListener.register((StepExecutionListener) listener);
+		if (listener instanceof StepExecutionListener executionListener) {
+			this.stepListener.register(executionListener);
 		}
-		if (listener instanceof ChunkListener) {
-			this.chunkListener.register((ChunkListener) listener);
+		if (listener instanceof ChunkListener chunkListener1) {
+			this.chunkListener.register(chunkListener1);
 		}
 		if (listener instanceof ItemReadListener<?>) {
 			@SuppressWarnings("unchecked")
@@ -323,8 +323,8 @@ public class MulticasterBatchListener<T, S> implements StepExecutionListener, Ch
 	 */
 	private Throwable getTargetException(RuntimeException e) {
 		Throwable cause = e.getCause();
-		if (cause != null && cause instanceof InvocationTargetException) {
-			return ((InvocationTargetException) cause).getTargetException();
+		if (cause != null && cause instanceof InvocationTargetException exception) {
+			return exception.getTargetException();
 		}
 		return e;
 	}

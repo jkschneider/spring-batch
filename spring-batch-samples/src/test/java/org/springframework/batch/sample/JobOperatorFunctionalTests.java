@@ -148,8 +148,8 @@ class JobOperatorFunctionalTests {
 			running = operator.getSummary(exec1).contains("STARTED") && operator.getSummary(exec2).contains("STARTED");
 		}
 
-		assertTrue(running, String.format("Jobs not started: [%s] and [%s]", operator.getSummary(exec1),
-				operator.getSummary(exec1)));
+		assertTrue(running, "Jobs not started: [%s] and [%s]".formatted(operator.getSummary(exec1),
+		operator.getSummary(exec1)));
 
 		operator.stop(exec1);
 		operator.stop(exec2);

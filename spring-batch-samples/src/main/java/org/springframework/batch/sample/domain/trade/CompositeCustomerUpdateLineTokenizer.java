@@ -57,8 +57,10 @@ public class CompositeCustomerUpdateLineTokenizer implements StepExecutionListen
 			long fileUpdateTotal = fs.readLong(1);
 			if (customerUpdateTotal != fileUpdateTotal) {
 				throw new IllegalStateException(
-						"The total number of customer updates in the file footer does not match the "
-								+ "number entered  File footer total: [" + fileUpdateTotal
+						"""
+								The total number of customer updates in the file footer does not match the \
+								number entered  File footer total: [\
+								""" + fileUpdateTotal
 								+ "] Total encountered during processing: [" + customerUpdateTotal + "]");
 			}
 			else {

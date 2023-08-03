@@ -70,8 +70,8 @@ public class ChunkContext extends AttributeAccessorSupport {
 	 */
 	@Override
 	public String toString() {
-		return String.format("ChunkContext: attributes=%s, complete=%b, stepContext=%s",
-				Arrays.asList(attributeNames()), complete, stepContext);
+		return "ChunkContext: attributes=%s, complete=%b, stepContext=%s".formatted(
+		Arrays.asList(attributeNames()), complete, stepContext);
 	}
 
 }

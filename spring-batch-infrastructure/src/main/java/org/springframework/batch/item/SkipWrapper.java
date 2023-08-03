@@ -62,7 +62,7 @@ public class SkipWrapper<T> {
 
 	@Override
 	public String toString() {
-		return String.format("[exception=%s, item=%s]", exception, item);
+		return "[exception=%s, item=%s]".formatted(exception, item);
 	}
 
 }

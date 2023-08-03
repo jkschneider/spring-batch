@@ -251,7 +251,10 @@ public class JdbcStepExecutionDao extends AbstractJdbcBatchMetadataDao implement
 
 		validateStepExecution(stepExecution);
 		Assert.notNull(stepExecution.getId(),
-				"StepExecution Id cannot be null. StepExecution must saved" + " before it can be updated.");
+				"""
+				StepExecution Id cannot be null. StepExecution must saved\
+				 before it can be updated.\
+				""");
 
 		// Do not check for existence of step execution considering
 		// it is saved at every commit point.

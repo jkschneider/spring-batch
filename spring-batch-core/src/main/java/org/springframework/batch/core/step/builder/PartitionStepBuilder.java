@@ -191,8 +191,10 @@ public class PartitionStepBuilder extends StepBuilderHelper<PartitionStepBuilder
 				}
 				catch (Exception e) {
 					if (logger.isInfoEnabled()) {
-						logger.info("Ignored exception from step asking for name and allowStartIfComplete flag. "
-								+ "Using default from enclosing PartitionStep (" + name + "," + allowStartIfComplete
+						logger.info("""
+								Ignored exception from step asking for name and allowStartIfComplete flag. \
+								Using default from enclosing PartitionStep (\
+								""" + name + "," + allowStartIfComplete
 								+ ").");
 					}
 				}

@@ -264,7 +264,7 @@ public class MessageChannelPartitionHandler extends AbstractPartitionHandler imp
 				.forEach(result::add);
 
 			if (logger.isDebugEnabled()) {
-				logger.debug(String.format("Currently waiting on %s partitions to finish", split.size()));
+				logger.debug("Currently waiting on %s partitions to finish".formatted(split.size()));
 			}
 
 			if (result.size() == split.size()) {

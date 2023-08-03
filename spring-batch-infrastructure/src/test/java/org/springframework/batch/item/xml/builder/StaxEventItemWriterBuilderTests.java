@@ -57,13 +57,16 @@ class StaxEventItemWriterBuilderTests {
 
 	private Marshaller marshaller;
 
-	private static final String FULL_OUTPUT = "<?xml version='1.1' encoding='UTF-16'?>"
-			+ "<foobarred baz=\"quix\">\uFEFF<ns:group><ns2:item xmlns:ns2=\"https://www.springframework.org/test\">"
-			+ "<first>1</first><second>two</second><third>three</third></ns2:item>\uFEFF"
-			+ "<ns2:item xmlns:ns2=\"https://www.springframework.org/test\"><first>4</first>"
-			+ "<second>five</second><third>six</third></ns2:item>\uFEFF"
-			+ "<ns2:item xmlns:ns2=\"https://www.springframework.org/test\"><first>7</first>"
-			+ "<second>eight</second><third>nine</third></ns2:item>\uFEFF</ns:group>\uFEFF" + "</foobarred>";
+	private static final String FULL_OUTPUT = """
+			<?xml version='1.1' encoding='UTF-16'?>\
+			<foobarred baz="quix">﻿<ns:group><ns2:item xmlns:ns2="https://www.springframework.org/test">\
+			<first>1</first><second>two</second><third>three</third></ns2:item>﻿\
+			<ns2:item xmlns:ns2="https://www.springframework.org/test"><first>4</first>\
+			<second>five</second><third>six</third></ns2:item>﻿\
+			<ns2:item xmlns:ns2="https://www.springframework.org/test"><first>7</first>\
+			<second>eight</second><third>nine</third></ns2:item>﻿</ns:group>﻿\
+			</foobarred>\
+			""";
 
 	@BeforeEach
 	void setUp() throws IOException {

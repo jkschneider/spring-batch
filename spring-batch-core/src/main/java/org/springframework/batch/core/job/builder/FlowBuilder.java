@@ -236,8 +236,8 @@ public class FlowBuilder<Q> {
 		}
 		flow = new SimpleFlow(name);
 		// optimization for flows that only have one state that itself is a flow:
-		if (currentState instanceof FlowState && states.size() == 1) {
-			return ((FlowState) currentState).getFlows().iterator().next();
+		if (currentState instanceof FlowState state && states.size() == 1) {
+			return state.getFlows().iterator().next();
 		}
 		addDanglingEndStates();
 		flow.setStateTransitions(transitions);
@@ -274,23 +274,22 @@ public class FlowBuilder<Q> {
 
 	private State createState(Object input) {
 		State result;
-		if (input instanceof Step) {
+		if (input instanceof Step step) {
 			if (!states.containsKey(input)) {
-				Step step = (Step) input;
 				states.put(input, new StepState(prefix + "step" + (stepCounter++), step));
 			}
 			result = states.get(input);
 		}
-		else if (input instanceof JobExecutionDecider) {
+		else if (input instanceof JobExecutionDecider decider) {
 			if (!states.containsKey(input)) {
 				states.put(input,
-						new DecisionState((JobExecutionDecider) input, prefix + "decision" + (decisionCounter++)));
+						new DecisionState(decider, prefix + "decision" + (decisionCounter++)));
 			}
 			result = states.get(input);
 		}
-		else if (input instanceof Flow) {
+		else if (input instanceof Flow flow1) {
 			if (!states.containsKey(input)) {
-				states.put(input, new FlowState((Flow) input, prefix + "flow" + (flowCounter++)));
+				states.put(input, new FlowState(flow1, prefix + "flow" + (flowCounter++)));
 			}
 			result = states.get(input);
 		}
@@ -629,8 +628,8 @@ public class FlowBuilder<Q> {
 			String name = "split" + (parent.splitCounter++);
 			State one = parent.currentState;
 
-			if (one instanceof SplitState) {
-				parent.currentState = parent.createState(list, executor, (SplitState) one);
+			if (one instanceof SplitState state) {
+				parent.currentState = parent.createState(list, executor, state);
 				return parent;
 			}
 
@@ -639,8 +638,8 @@ public class FlowBuilder<Q> {
 				stateBuilder.currentState = one;
 				list.add(stateBuilder.build());
 			}
-			else if (one instanceof FlowState && parent.states.size() == 1) {
-				list.add(((FlowState) one).getFlows().iterator().next());
+			else if (one instanceof FlowState state && parent.states.size() == 1) {
+				list.add(state.getFlows().iterator().next());
 			}
 
 			parent.currentState = parent.createState(list, executor, null);

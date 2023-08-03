@@ -199,10 +199,10 @@ public abstract class AbstractApplicationContextFactory implements ApplicationCo
 			List<BeanPostProcessor> parentPostProcessors = new ArrayList<>();
 			List<BeanPostProcessor> childPostProcessors = new ArrayList<>();
 
-			childPostProcessors.addAll(beanFactory instanceof AbstractBeanFactory
-					? ((AbstractBeanFactory) beanFactory).getBeanPostProcessors() : new ArrayList<>());
-			parentPostProcessors.addAll(parent instanceof AbstractBeanFactory
-					? ((AbstractBeanFactory) parent).getBeanPostProcessors() : new ArrayList<>());
+			childPostProcessors.addAll(beanFactory instanceof AbstractBeanFactory abf
+					? abf.getBeanPostProcessors() : new ArrayList<>());
+			parentPostProcessors.addAll(parent instanceof AbstractBeanFactory abf
+					? abf.getBeanPostProcessors() : new ArrayList<>());
 
 			try {
 				Class<?> applicationContextAwareProcessorClass = ClassUtils.forName(
@@ -237,8 +237,8 @@ public abstract class AbstractApplicationContextFactory implements ApplicationCo
 
 			beanFactory.copyConfigurationFrom(parent);
 
-			List<BeanPostProcessor> beanPostProcessors = beanFactory instanceof AbstractBeanFactory
-					? ((AbstractBeanFactory) beanFactory).getBeanPostProcessors() : new ArrayList<>();
+			List<BeanPostProcessor> beanPostProcessors = beanFactory instanceof AbstractBeanFactory abf
+					? abf.getBeanPostProcessors() : new ArrayList<>();
 
 			beanPostProcessors.clear();
 			beanPostProcessors.addAll(aggregatedPostProcessors);

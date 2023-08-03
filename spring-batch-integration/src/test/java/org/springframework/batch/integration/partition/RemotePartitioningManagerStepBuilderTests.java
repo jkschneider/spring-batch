@@ -151,10 +151,13 @@ class RemotePartitioningManagerStepBuilderTests {
 				() -> builder.partitionHandler(partitionHandler));
 
 		// then
-		assertThat(expectedException).hasMessage("When configuring a manager step "
-				+ "for remote partitioning using the RemotePartitioningManagerStepBuilder, "
-				+ "the partition handler will be automatically set to an instance "
-				+ "of MessageChannelPartitionHandler. The partition handler must " + "not be provided in this case.");
+		assertThat(expectedException).hasMessage("""
+				When configuring a manager step \
+				for remote partitioning using the RemotePartitioningManagerStepBuilder, \
+				the partition handler will be automatically set to an instance \
+				of MessageChannelPartitionHandler. The partition handler must \
+				not be provided in this case.\
+				""");
 	}
 
 	@Test

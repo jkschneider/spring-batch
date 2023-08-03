@@ -44,7 +44,7 @@ class H2PagingQueryProviderIntegrationTests {
 	@ParameterizedTest
 	@EnumSource(ModeEnum.class)
 	void testQueryProvider(ModeEnum compatibilityMode) {
-		String connectionUrl = String.format("jdbc:h2:mem:%s;MODE=%s", UUID.randomUUID(), compatibilityMode);
+		String connectionUrl = "jdbc:h2:mem:%s;MODE=%s".formatted(UUID.randomUUID(), compatibilityMode);
 		DataSource dataSource = new SimpleDriverDataSource(new org.h2.Driver(), connectionUrl, "sa", "");
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		PlatformTransactionManager transactionManager = new JdbcTransactionManager(dataSource);

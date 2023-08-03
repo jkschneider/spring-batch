@@ -139,8 +139,10 @@ public class DefaultJobLoader implements JobLoader, InitializingBean {
 			return doLoad(factory, true);
 		}
 		catch (DuplicateJobException e) {
-			throw new IllegalStateException("Found duplicate job in reload (it should have been unregistered "
-					+ "if it was previously registered in this loader)", e);
+			throw new IllegalStateException("""
+					Found duplicate job in reload (it should have been unregistered \
+					if it was previously registered in this loader)\
+					""", e);
 		}
 	}
 

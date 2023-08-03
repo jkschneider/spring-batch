@@ -234,11 +234,13 @@ public class ChunkMessageChannelItemWriter<T>
 					+ jobInstanceId + "] should have been [" + localState.getJobId() + "].");
 			if (payload.isRedelivered()) {
 				logger.warn(
-						"Redelivered result detected, which may indicate stale state. In the best case, we just picked up a timed out message "
-								+ "from a previous failed execution. In the worst case (and if this is not a restart), "
-								+ "the step may now timeout.  In that case if you believe that all messages "
-								+ "from workers have been sent, the business state "
-								+ "is probably inconsistent, and the step will fail.");
+						"""
+						Redelivered result detected, which may indicate stale state. In the best case, we just picked up a timed out message \
+						from a previous failed execution. In the worst case (and if this is not a restart), \
+						the step may now timeout.  In that case if you believe that all messages \
+						from workers have been sent, the business state \
+						is probably inconsistent, and the step will fail.\
+						""");
 				localState.incrementRedelivered();
 			}
 			localState.pushResponse(payload);
@@ -255,11 +257,11 @@ public class ChunkMessageChannelItemWriter<T>
 	 * {@link AsynchronousFailureException}.
 	 */
 	protected static AsynchronousFailureException wrapIfNecessary(Throwable throwable) {
-		if (throwable instanceof Error) {
-			throw (Error) throwable;
+		if (throwable instanceof Error error) {
+			throw error;
 		}
-		else if (throwable instanceof AsynchronousFailureException) {
-			return (AsynchronousFailureException) throwable;
+		else if (throwable instanceof AsynchronousFailureException exception) {
+			return exception;
 		}
 		else {
 			return new AsynchronousFailureException("Exception in remote process", throwable);

@@ -128,8 +128,8 @@ public class SplitState extends AbstractState implements FlowHolder {
 			catch (ExecutionException e) {
 				// Unwrap the expected exceptions
 				Throwable cause = e.getCause();
-				if (cause instanceof Exception) {
-					throw (Exception) cause;
+				if (cause instanceof Exception exception) {
+					throw exception;
 				}
 				else {
 					throw e;

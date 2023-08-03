@@ -195,15 +195,19 @@ class DefaultJobLoaderTests {
 		}
 	}
 
-	private static final String BASIC_JOB_XML = String.format(
-			"<beans xmlns='http://www.springframework.org/schema/beans' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' "
-					+ "xsi:schemaLocation='http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd'><bean class='%s$BasicStubJob'/></beans>",
-			DefaultJobLoaderTests.class.getName());
+	private static final String BASIC_JOB_XML = (
+	"""
+<beans xmlns='http://www.springframework.org/schema/beans' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' \
+xsi:schemaLocation='http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd'><bean class='%s$BasicStubJob'/></beans>\
+""").formatted(
+	DefaultJobLoaderTests.class.getName());
 
-	private static final String JOB_XML = String.format(
-			"<beans xmlns='http://www.springframework.org/schema/beans' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' "
-					+ "xsi:schemaLocation='http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd'><bean class='%s$StubJob'/></beans>",
-			DefaultJobLoaderTests.class.getName());
+	private static final String JOB_XML = (
+	"""
+<beans xmlns='http://www.springframework.org/schema/beans' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' \
+xsi:schemaLocation='http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd'><bean class='%s$StubJob'/></beans>\
+""").formatted(
+	DefaultJobLoaderTests.class.getName());
 
 	public static class BasicStubJob implements Job {
 

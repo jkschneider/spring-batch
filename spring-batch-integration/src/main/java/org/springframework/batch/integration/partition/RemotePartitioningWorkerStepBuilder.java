@@ -267,8 +267,10 @@ public class RemotePartitioningWorkerStepBuilder extends StepBuilder {
 		}
 		if (this.outputChannel == null) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("The output channel is set to a NullChannel. "
-						+ "The manager step must poll the job repository for workers status.");
+				logger.debug("""
+						The output channel is set to a NullChannel. \
+						The manager step must poll the job repository for workers status.\
+						""");
 			}
 			this.outputChannel = new NullChannel();
 		}
